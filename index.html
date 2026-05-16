@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajesh Shanmugam | R2R & GL Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* =============================================
+   CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ============================================= */
+:root {
+  --navy:       #0a1628;
+  --navy-mid:   #0f2044;
+  --navy-light: #16305c;
+  --gold:       #c9a84c;
+  --gold-light: #e4c97e;
+  --steel:      #3a5a8a;
+  --mist:       #e8edf5;
+  --cloud:      #f4f6fb;
+  --white:      #ffffff;
+  --text-dark:  #0d1b2a;
+  --text-mid:   #3d556e;
+  --text-light: #7a93ad;
+  --border:     rgba(201,168,76,0.18);
+  --shadow-sm:  0 2px 12px rgba(10,22,40,0.08);
+  --shadow-md:  0 8px 32px rgba(10,22,40,0.13);
+  --shadow-lg:  0 20px 60px rgba(10,22,40,0.18);
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --ff-display: 'Playfair Display', Georgia, serif;
+  --ff-body:    'DM Sans', sans-serif;
+  --ff-mono:    'JetBrains Mono', monospace;
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--ff-body);
+  background: var(--cloud);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* =============================================
+   SCROLLBAR
+   ============================================= */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* =============================================
+   NAVIGATION
+   ============================================= */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(10,22,40,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+.nav-brand {
+  font-family: var(--ff-display);
+  font-size: 1.25rem;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+.nav-brand span { color: var(--gold); }
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  background: var(--gold);
+  color: var(--navy) !important;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+/* Hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 2px; background: var(--white); transition: var(--transition); }
+
+/* =============================================
+   HERO SECTION
+   ============================================= */
+#hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+}
+
+/* Geometric background pattern */
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(22,48,92,0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(201,168,76,0.06) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.hero-accent {
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.1);
+  animation: pulse-ring 6s ease-in-out infinite;
+}
+.hero-accent::before {
+  content: '';
+  position: absolute;
+  inset: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.08);
+}
+.hero-accent::after {
+  content: '';
+  position: absolute;
+  inset: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.06);
+}
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.7; }
+}
+
+/* Floating finance elements */
+.float-tag {
+  position: absolute;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.9rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  opacity: 0;
+  animation: float-in 0.8s ease forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+.float-tag:nth-child(1) { top: 15%; right: 2%; animation-delay: 1s; }
+.float-tag:nth-child(2) { top: 55%; right: 2%; animation-delay: 1.3s; }
+.float-tag:nth-child(3) { bottom: 20%; right: 2%; animation-delay: 1.6s; }
+.float-tag:nth-child(4) { display: none; }
+@keyframes float-in {
+  to { opacity: 1; }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: slide-up 0.7s ease 0.2s forwards;
+}
+.hero-badge i { font-size: 0.7rem; }
+
+.hero-name {
+  font-family: var(--ff-display);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: slide-up 0.7s ease 0.4s forwards;
+}
+.hero-name .gold { color: var(--gold); }
+.hero-title {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: slide-up 0.7s ease 0.6s forwards;
+}
+.hero-title span {
+  color: var(--gold);
+  font-weight: 600;
+}
+.hero-summary {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  opacity: 0;
+  animation: slide-up 0.7s ease 0.8s forwards;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: slide-up 0.7s ease 1s forwards;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  letter-spacing: 0.3px;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* Hero right: stat cards */
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  opacity: 0;
+  animation: slide-up 0.7s ease 1.2s forwards;
+}
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.stat-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-4px);
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.stat-card .stat-icon {
+  width: 36px; height: 36px;
+  background: rgba(201,168,76,0.12);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.stat-card .stat-num {
+  font-family: var(--ff-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat-card .stat-num .plus { color: var(--gold); }
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 400;
+  line-height: 1.3;
+}
+.stat-card-wide {
+  grid-column: 1 / -1;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =============================================
+   SECTION SHARED STYLES
+   ============================================= */
+section { padding: 6rem 2rem; }
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.section-label::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.section-sub {
+  font-size: 1rem;
+  color: var(--text-mid);
+  max-width: 560px;
+  margin-bottom: 3.5rem;
+}
+
+/* Dark section variant */
+.dark-section {
+  background: var(--navy);
+}
+.dark-section .section-title { color: var(--white); }
+.dark-section .section-sub { color: rgba(255,255,255,0.55); }
+
+/* =============================================
+   ABOUT SECTION
+   ============================================= */
+#about { background: var(--white); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 4rem;
+  align-items: start;
+}
+.about-left {}
+.about-avatar-wrap {
+  position: relative;
+  width: 220px;
+  margin-bottom: 2rem;
+}
+.about-avatar-placeholder {
+  width: 220px; height: 220px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 100%);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-display);
+  font-size: 4rem;
+  color: var(--gold);
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.about-avatar-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(201,168,76,0.15) 100%);
+  pointer-events: none;
+}
+.about-avatar-badge {
+  position: absolute;
+  bottom: -12px; right: -12px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  z-index: 2;
+}
+.about-info-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.info-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.875rem;
+  color: var(--text-mid);
+}
+.info-chip i {
+  width: 32px; height: 32px;
+  background: var(--cloud);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--navy-light);
+  flex-shrink: 0;
+}
+.about-right {}
+.about-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 2rem;
+}
+.about-text strong { color: var(--text-dark); }
+.about-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.highlight-item {
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  border-left: 3px solid var(--gold);
+  transition: var(--transition);
+}
+.highlight-item:hover {
+  background: var(--mist);
+  transform: translateX(4px);
+}
+.highlight-item .h-icon {
+  font-size: 1.2rem;
+  color: var(--navy-light);
+  margin-bottom: 0.5rem;
+}
+.highlight-item .h-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.2rem;
+}
+.highlight-item .h-desc {
+  font-size: 0.78rem;
+  color: var(--text-mid);
+}
+
+/* =============================================
+   SKILLS SECTION
+   ============================================= */
+#skills { background: var(--cloud); }
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.skill-bars-wrap {}
+.skill-bar-item {
+  margin-bottom: 1.5rem;
+}
+.skill-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.skill-bar-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.skill-bar-pct {
+  font-family: var(--ff-mono);
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+.skill-bar-track {
+  height: 6px;
+  background: var(--mist);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--navy-light), var(--gold));
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Tool chips */
+.tools-grid-wrap {}
+.tools-group { margin-bottom: 2rem; }
+.tools-group-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+  font-family: var(--ff-mono);
+}
+.tool-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--white);
+  border: 1px solid var(--mist);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: default;
+}
+.tool-chip:hover {
+  border-color: var(--navy-light);
+  color: var(--navy);
+  background: var(--mist);
+}
+.tool-chip i { font-size: 0.7rem; color: var(--gold); }
+
+/* =============================================
+   EXPERIENCE SECTION (TIMELINE)
+   ============================================= */
+#experience { background: var(--white); }
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px;
+  width: 1px;
+  height: calc(100% - 8px);
+  background: linear-gradient(to bottom, var(--gold) 0%, rgba(201,168,76,0.1) 100%);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.timeline-dot {
+  position: absolute;
+  left: -2.5rem;
+  top: 4px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--gold);
+  z-index: 1;
+  transition: var(--transition);
+}
+.timeline-item:hover .timeline-dot {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(201,168,76,0.15);
+}
+.timeline-card {
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.timeline-item:hover .timeline-card {
+  border-color: rgba(201,168,76,0.2);
+  box-shadow: var(--shadow-md);
+  background: var(--white);
+}
+.timeline-item:hover .timeline-card::before { opacity: 1; }
+.tl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+.tl-role {
+  font-family: var(--ff-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.tl-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 100px;
+  padding: 0.2rem 0.75rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.tl-company {
+  font-size: 0.875rem;
+  color: var(--navy-light);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.tl-location {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-bottom: 1.2rem;
+}
+.tl-location i { margin-right: 0.3rem; }
+.tl-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.tl-bullets li {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  padding-left: 1.2rem;
+  position: relative;
+  line-height: 1.5;
+}
+.tl-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.7rem;
+  top: 0.2em;
+}
+.tl-bullets li strong { color: var(--text-dark); }
+.tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.2rem;
+}
+.tl-tag {
+  padding: 0.25rem 0.65rem;
+  background: rgba(15,32,68,0.07);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  color: var(--navy-light);
+  font-weight: 600;
+  font-family: var(--ff-mono);
+}
+
+/* =============================================
+   ACHIEVEMENTS / KPI SECTION
+   ============================================= */
+#achievements {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+}
+#achievements::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  position: relative;
+}
+.kpi-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.kpi-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-6px);
+}
+.kpi-card:hover::after { opacity: 1; }
+.kpi-icon {
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+.kpi-num {
+  font-family: var(--ff-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.kpi-num .accent { color: var(--gold); }
+.kpi-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.4;
+}
+
+/* =============================================
+   PROJECTS SECTION
+   ============================================= */
+#projects { background: var(--cloud); }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.project-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  border: 1px solid var(--mist);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(201,168,76,0.2);
+}
+.proj-cat {
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.proj-title {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+.proj-desc {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+.proj-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.proj-tool {
+  padding: 0.2rem 0.6rem;
+  background: var(--cloud);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  color: var(--navy-light);
+  font-weight: 600;
+}
+
+/* =============================================
+   EDUCATION & CERTIFICATIONS
+   ============================================= */
+#education { background: var(--white); }
+.edu-cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.edu-card {
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--navy-light);
+  transition: var(--transition);
+}
+.edu-card:hover {
+  background: var(--mist);
+  border-left-color: var(--gold);
+}
+.edu-degree {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+}
+.edu-school {
+  font-size: 0.85rem;
+  color: var(--navy-light);
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+.edu-year {
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.cert-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+.cert-item:hover {
+  border-color: rgba(201,168,76,0.25);
+  background: var(--mist);
+  transform: translateX(4px);
+}
+.cert-icon {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 100%);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.cert-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.15rem;
+  line-height: 1.3;
+}
+.cert-issuer {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* =============================================
+   CONTACT SECTION
+   ============================================= */
+#contact {
+  background: var(--navy);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#contact::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(58,90,138,0.4) 0%, transparent 70%);
+}
+.contact-inner { position: relative; z-index: 1; }
+.contact-inner .section-label { justify-content: center; }
+.contact-inner .section-title { color: var(--white); }
+.contact-inner .section-sub { color: rgba(255,255,255,0.5); margin: 0 auto 3rem; text-align: center; }
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  transition: var(--transition);
+  color: var(--white);
+}
+.contact-card:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+.contact-card i {
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+.contact-card .cc-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+}
+.contact-card .cc-val {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer {
+  background: #060e1c;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.2);
+  font-family: var(--ff-mono);
+}
+footer span { color: var(--gold); }
+
+/* =============================================
+   SCROLL REVEAL
+   ============================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1024px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--navy); padding: 1.5rem; border-bottom: 1px solid var(--border); gap: 1rem; }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-avatar-wrap { width: 140px; }
+  .about-avatar-placeholder { width: 140px; height: 140px; font-size: 2.5rem; }
+  .skills-layout { grid-template-columns: 1fr; }
+  .edu-cert-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .about-highlights { grid-template-columns: 1fr; }
+  .float-tag { display: none; }
+  section { padding: 4rem 1.25rem; }
+}
+@media (max-width: 480px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+  .btn { justify-content: center; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .contact-cards { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     NAVIGATION
+     ============================================= -->
+<nav id="navbar">
+  <div class="nav-brand">Rajesh <span>Shanmugam</span></div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- =============================================
+     HERO SECTION
+     ============================================= -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-accent"></div>
+
+  <div class="hero-inner">
+    <!-- Left: Text -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        <i class="fas fa-circle" style="color:var(--gold);font-size:0.5rem;"></i>
+        Available for R2R / GL / Finance Analyst Roles
+      </div>
+      <h1 class="hero-name">Rajesh<br><span class="gold">Shanmugam</span></h1>
+      <p class="hero-title">R2R &amp; GL Specialist &nbsp;|&nbsp; <span>Senior Accounts Executive</span></p>
+      <p class="hero-summary">
+        9+ years in <strong style="color:rgba(255,255,255,0.85)">Record-to-Report, General Ledger, and Financial Reporting</strong> across multi-country entities. Experienced in month-end close, intercompany reconciliation, fixed asset accounting, and building finance automation tools in Excel and Python.
+      </p>
+      <div class="hero-btns">
+        <a href="Rajesh_Resume_251125.pdf" download class="btn btn-primary">
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <i class="fas fa-envelope"></i> Contact Me
+        </a>
+        <a href="https://www.linkedin.com/in/shanmugamrajesh" target="_blank" class="btn btn-outline">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: KPI Cards -->
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="stat-num">9<span class="plus">+</span></div>
+        <div class="stat-label">Years in R2R &amp; GL Accounting</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-globe"></i></div>
+        <div class="stat-num">5<span class="plus">+</span></div>
+        <div class="stat-label">Countries — SG, AE, ET, KE, IN</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+        <div class="stat-num">2<span class="plus">+</span></div>
+        <div class="stat-label">ERP Systems Worked On</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+        <div class="stat-num">5<span class="plus">+</span></div>
+        <div class="stat-label">Certifications Completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     ABOUT SECTION
+     ============================================= -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="about-avatar-wrap">
+          <div class="about-avatar-placeholder">RS</div>
+          <div class="about-avatar-badge">Senior<br>Accounts Exec</div>
+        </div>
+        <div class="about-info-chips" style="margin-top: 2rem;">
+          <div class="info-chip"><i class="fas fa-map-marker-alt"></i> Avinashi, Tamil Nadu</div>
+          <div class="info-chip"><i class="fas fa-envelope"></i> rajeshshanmugam@zohomail.in</div>
+          <div class="info-chip"><i class="fas fa-phone"></i> +91 9791325961</div>
+          <div class="info-chip"><i class="fas fa-language"></i> English &amp; Tamil</div>
+          <div class="info-chip"><i class="fas fa-user-graduate"></i> MBA (Finance) | B.Com (CA)</div>
+        </div>
+      </div>
+      <div class="about-right reveal">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Finance Professional<br>Built on Detail &amp; Data</h2>
+        <p class="about-text">
+          I am a <strong>Senior Accounts Executive — Overseas (R2R/GL)</strong> with 9+ years of progressive experience in Record-to-Report, General Ledger, and financial reporting. My career spans fast-paced corporate environments where I've led month-end close activities, built audit-ready reconciliations, and delivered meaningful MIS insights to management across multi-geography entities.
+        </p>
+        <p class="about-text">
+          Beyond routine accounting, I actively invest in <strong>finance automation</strong> — building Excel tools, Python-based reconciliation scripts, and Power BI dashboards that reduce manual effort and sharpen analytical output. I am currently transitioning toward IT/BPO finance roles at organisations like <strong>Infosys, Genpact, Accenture Operations</strong>, and similar.
+        </p>
+        <div class="about-highlights">
+          <div class="highlight-item">
+            <div class="h-icon"><i class="fas fa-sync-alt"></i></div>
+            <div class="h-title">Month-End Close</div>
+            <div class="h-desc">Accruals, prepaids, JEs, reclassifications — consistently on time</div>
+          </div>
+          <div class="highlight-item">
+            <div class="h-icon"><i class="fas fa-exchange-alt"></i></div>
+            <div class="h-title">Intercompany Recon</div>
+            <div class="h-desc">Multi-entity confirmation, mismatch resolution, clean books</div>
+          </div>
+          <div class="highlight-item">
+            <div class="h-icon"><i class="fas fa-building"></i></div>
+            <div class="h-title">Fixed Asset Register</div>
+            <div class="h-desc">WDV, SLM, IT Act block classification, FAR from scratch</div>
+          </div>
+          <div class="highlight-item">
+            <div class="h-icon"><i class="fas fa-robot"></i></div>
+            <div class="h-title">Finance Automation</div>
+            <div class="h-desc">Excel macros, Python scripts, Power BI dashboards</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SKILLS SECTION
+     ============================================= -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <p class="section-sub">Core competencies built over 9+ years of hands-on finance and accounting work.</p>
+
+    <div class="skills-layout">
+      <!-- Skill Bars -->
+      <div class="skill-bars-wrap reveal">
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Record-to-Report (R2R) / GL Accounting</span>
+            <span class="skill-bar-pct">95%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Month-End Close &amp; Journal Entries</span>
+            <span class="skill-bar-pct">95%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Financial Reporting (P&amp;L, BS, Consolidation)</span>
+            <span class="skill-bar-pct">90%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Advanced Excel (Lookup, Index-Match, Pivot)</span>
+            <span class="skill-bar-pct">90%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Fixed Asset Accounting &amp; Depreciation</span>
+            <span class="skill-bar-pct">88%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Intercompany Reconciliation</span>
+            <span class="skill-bar-pct">85%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Power BI &amp; Data Modeling</span>
+            <span class="skill-bar-pct">65%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="65"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-header">
+            <span class="skill-bar-name">Python for Finance Automation</span>
+            <span class="skill-bar-pct">45%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="45"></div></div>
+        </div>
+      </div>
+
+      <!-- Tool Chips -->
+      <div class="tools-grid-wrap reveal">
+        <div class="tools-group">
+          <div class="tools-group-title">ERP &amp; Accounting Systems</div>
+          <div class="tool-chips">
+            <div class="tool-chip"><i class="fas fa-database"></i> Tally Prime</div>
+            <div class="tool-chip"><i class="fas fa-database"></i> Axpert ERP</div>
+            <div class="tool-chip"><i class="fas fa-cubes"></i> SAP FICO (Learning)</div>
+          </div>
+        </div>
+        <div class="tools-group">
+          <div class="tools-group-title">Analytics &amp; Reporting</div>
+          <div class="tool-chips">
+            <div class="tool-chip"><i class="fas fa-file-excel"></i> Advanced Excel</div>
+            <div class="tool-chip"><i class="fas fa-chart-bar"></i> Power BI</div>
+            <div class="tool-chip"><i class="fas fa-table"></i> Pivot Tables</div>
+            <div class="tool-chip"><i class="fas fa-filter"></i> Data Modeling</div>
+          </div>
+        </div>
+        <div class="tools-group">
+          <div class="tools-group-title">Automation &amp; Coding</div>
+          <div class="tool-chips">
+            <div class="tool-chip"><i class="fab fa-python"></i> Python</div>
+            <div class="tool-chip"><i class="fas fa-terminal"></i> Pandas</div>
+            <div class="tool-chip"><i class="fas fa-code"></i> Excel VBA</div>
+          </div>
+        </div>
+        <div class="tools-group">
+          <div class="tools-group-title">Finance Functions</div>
+          <div class="tool-chips">
+            <div class="tool-chip"><i class="fas fa-receipt"></i> AR / AP</div>
+            <div class="tool-chip"><i class="fas fa-university"></i> Bank Recon</div>
+            <div class="tool-chip"><i class="fas fa-building"></i> FAR / Depreciation</div>
+            <div class="tool-chip"><i class="fas fa-file-invoice"></i> GST / TDS</div>
+            <div class="tool-chip"><i class="fas fa-search-dollar"></i> Variance Analysis</div>
+            <div class="tool-chip"><i class="fas fa-handshake"></i> Statutory Audit</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     EXPERIENCE SECTION
+     ============================================= -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Work Experience</h2>
+    <p class="section-sub">A consistent upward trajectory in finance, from GL basics to multi-entity R2R leadership.</p>
+
+    <div class="timeline">
+
+      <!-- Job 1: NV Lands - CURRENT (most recent first) -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Senior Officer — Accounts</div>
+            <div class="tl-period"><i class="fas fa-circle" style="font-size:0.4rem;"></i> Mar 2026 — Present</div>
+          </div>
+          <div class="tl-company">NV Lands (Real Estate Firm)</div>
+          <div class="tl-location"><i class="fas fa-map-marker-alt"></i> Avinashi, Tamil Nadu</div>
+          <ul class="tl-bullets">
+            <li>Built <strong>multi-year Fixed Asset Registers from scratch</strong> using Tally data for two real estate entities — Fox Dean Estates and Lords &amp; Partners PMS.</li>
+            <li>Applied <strong>Companies Act Schedule II (WDV)</strong> and <strong>IT Act Appendix I block-of-assets</strong> depreciation methodologies.</li>
+            <li>Rebuilt <strong>Charts of Accounts</strong> for multiple entities — correcting 1,400+ ledger entries including misclassifications, duplicates, and naming inconsistencies.</li>
+            <li>Designed a <strong>Python-based SQFT reconciliation tool</strong> across hundreds of property sites to identify gaps between Tally and the physical property register.</li>
+            <li>Handled <strong>GST filing and GSTR-2B reconciliation</strong> — matching purchase data with GSTIN-wise supplier filings for accurate ITC claims.</li>
+            <li>Prepared <strong>P&amp;L and Balance Sheet for audit closure</strong> — ensuring schedules, supporting documents, and ledger balances were audit-ready.</li>
+            <li>Delivered periodic <strong>P&amp;L reporting to management</strong> — analysing revenue, cost trends, and margins to support business decisions.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tl-tag">FAR</span>
+            <span class="tl-tag">WDV / IT Act</span>
+            <span class="tl-tag">CoA Rebuild</span>
+            <span class="tl-tag">Python</span>
+            <span class="tl-tag">GST / 2B Recon</span>
+            <span class="tl-tag">P&amp;L Reporting</span>
+            <span class="tl-tag">Tally</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 2: Best Corporation -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Senior Accounts Executive — Overseas (R2R/GL)</div>
+            <div class="tl-period"><i class="fas fa-circle" style="font-size:0.4rem;"></i> Apr 2023 — Mar 2026</div>
+          </div>
+          <div class="tl-company">Best Corporation Private Limited</div>
+          <div class="tl-location"><i class="fas fa-map-marker-alt"></i> Tiruppur, Tamil Nadu | Multi-Country: SG, ET, KE, AE, IN</div>
+          <ul class="tl-bullets">
+            <li>Led <strong>month-end close activities</strong> — accruals, prepaid amortization, expense reclassifications, and ledger adjustments across five international entities.</li>
+            <li>Prepared <strong>P&amp;L, Balance Sheet, and schedules</strong>; supported group consolidation for Singapore, Ethiopia, Kenya, Dubai, and India.</li>
+            <li>Owned <strong>intercompany reconciliation</strong>: coordinated confirmations across entities, identified and resolved mismatches before close deadlines.</li>
+            <li>Delivered <strong>MIS reports and variance analysis</strong> to management, converting raw ledger data into decision-ready financial narratives.</li>
+            <li>Managed <strong>fixed asset accounting</strong> end-to-end: capitalization, classification, depreciation workings (WDV / SLM), and disposals.</li>
+            <li>Performed <strong>AR/AP reconciliations</strong>, ageing analysis, and maintained audit-ready books at all times.</li>
+            <li>Utilized Excel and ERP tools to <strong>streamline reporting workflows</strong>, significantly reducing manual processing time.</li>
+            <li>Supported <strong>statutory audits</strong> by addressing auditor queries and providing schedules.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tl-tag">R2R</span>
+            <span class="tl-tag">GL</span>
+            <span class="tl-tag">Consolidation</span>
+            <span class="tl-tag">Month-End Close</span>
+            <span class="tl-tag">Intercompany</span>
+            <span class="tl-tag">Fixed Assets</span>
+            <span class="tl-tag">MIS Reporting</span>
+            <span class="tl-tag">Axpert ERP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Accounts Executive</div>
+            <div class="tl-period"><i class="fas fa-circle" style="font-size:0.4rem;"></i> Dec 2022 — Mar 2023</div>
+          </div>
+          <div class="tl-company">Best Corporation Private Limited</div>
+          <div class="tl-location"><i class="fas fa-map-marker-alt"></i> Tiruppur, Tamil Nadu</div>
+          <ul class="tl-bullets">
+            <li>Processed and raised <strong>vendor and customer invoices</strong> in compliance with company policies with 100% accuracy.</li>
+            <li>Performed <strong>monthly bank, vendor, and customer account reconciliations</strong>, identifying and resolving discrepancies.</li>
+            <li>Prepared <strong>monthly accounting provisions and journal entries</strong> for accruals and prepaid expenses to support accurate month-end closing.</li>
+            <li>Monitored <strong>outstanding payables and receivables</strong>, coordinating with vendors and clients to ensure timely settlements.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tl-tag">AR/AP</span>
+            <span class="tl-tag">Reconciliation</span>
+            <span class="tl-tag">Journal Entries</span>
+            <span class="tl-tag">Accruals</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Junior Accountant</div>
+            <div class="tl-period"><i class="fas fa-circle" style="font-size:0.4rem;"></i> Sep 2016 — Nov 2022</div>
+          </div>
+          <div class="tl-company">C S Garments</div>
+          <div class="tl-location"><i class="fas fa-map-marker-alt"></i> Tiruppur, Tamil Nadu</div>
+          <ul class="tl-bullets">
+            <li>Managed <strong>GST and TDS filings</strong> — monthly and quarterly returns with accuracy and timely submission.</li>
+            <li>Performed <strong>bank reconciliations</strong> and handled routine banking tasks.</li>
+            <li>Operated <strong>Tally software</strong> for end-to-end accounting and process streamlining.</li>
+            <li>Oversaw <strong>invoice processing, vendor payments</strong>, and customer account management.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tl-tag">Tally Prime</span>
+            <span class="tl-tag">GST / TDS</span>
+            <span class="tl-tag">Bank Reconciliation</span>
+            <span class="tl-tag">Vendor Management</span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     ACHIEVEMENTS / KPI SECTION
+     ============================================= -->
+<section id="achievements" class="dark-section">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--gold);">Impact</div>
+    <h2 class="section-title" style="color:var(--white);margin-bottom:0.5rem;">By the Numbers</h2>
+    <p class="section-sub" style="margin-bottom:3rem;">Measurable contributions across finance, automation, and process improvement.</p>
+    <div class="kpi-grid reveal">
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-globe-asia"></i></div>
+        <div class="kpi-num">5<span class="accent">+</span></div>
+        <div class="kpi-desc">Countries covered in multi-entity financial reporting</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-file-alt"></i></div>
+        <div class="kpi-num">1400<span class="accent">+</span></div>
+        <div class="kpi-desc">Ledger entries audited and rebuilt in Chart of Accounts projects</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-home"></i></div>
+        <div class="kpi-num">100<span class="accent">s</span></div>
+        <div class="kpi-desc">Property sites reconciled via Python SQFT tool</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-clock"></i></div>
+        <div class="kpi-num">9<span class="accent">+</span></div>
+        <div class="kpi-desc">Years of progressive R2R / GL accounting experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     PROJECTS SECTION
+     ============================================= -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Work Done</div>
+    <h2 class="section-title">Finance Projects</h2>
+    <p class="section-sub">Real-world accounting and automation initiatives that demonstrate depth beyond routine bookkeeping.</p>
+
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="proj-cat">Fixed Assets · Real Estate</div>
+        <div class="proj-title">Multi-Year Fixed Asset Register — Fox Dean Estates</div>
+        <div class="proj-desc">Built a complete FAR from FY 2022–23 to FY 2025–26 from raw Tally data. Applied Companies Act Schedule II WDV rates, then corrected to IT Act Appendix I block-of-assets methodology for 104 assets, with 72 requiring rate corrections. Added columns for IT block classification, prior shortfalls, and adjusted depreciation.</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Excel</span>
+          <span class="proj-tool">Tally</span>
+          <span class="proj-tool">Companies Act</span>
+          <span class="proj-tool">IT Act</span>
+          <span class="proj-tool">WDV</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-cat">Python Automation · Reconciliation</div>
+        <div class="proj-title">SQFT Reconciliation Tool — Property Register vs Tally</div>
+        <div class="proj-desc">Designed a Python-based reconciliation engine using Pandas to match property SQFT data from Tally against a physical property register across hundreds of sites. Identified a significant net gap attributed to unsold stock sites, providing management with a clean audit trail.</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Python</span>
+          <span class="proj-tool">Pandas</span>
+          <span class="proj-tool">Excel</span>
+          <span class="proj-tool">Tally Export</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-cat">Chart of Accounts · GL Rebuild</div>
+        <div class="proj-title">CoA Rebuild — Heavenly Freeholds &amp; Fox Dean</div>
+        <div class="proj-desc">Audited and restructured Chart of Accounts for two real estate entities with 1,400+ ledger entries — correcting ALL CAPS naming, duplicate entries, misclassified GST ITC, wrong Share Capital groupings, and fragmented TDS ledgers. Produced a clean, audit-ready ledger structure.</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Tally Prime</span>
+          <span class="proj-tool">Excel</span>
+          <span class="proj-tool">GL Classification</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-cat">Power BI · Reporting</div>
+        <div class="proj-title">Intercompany MIS Dashboard — Multi-Entity Group</div>
+        <div class="proj-desc">Built an MIS reporting framework to track intercompany balances, variance analysis, and close-cycle status across five international entities. Reduced management reporting time by eliminating manual consolidation steps. Delivered actionable insights through visual dashboards.</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Power BI</span>
+          <span class="proj-tool">Excel</span>
+          <span class="proj-tool">Axpert ERP</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-cat">Excel VBA · Reconciliation Automation</div>
+        <div class="proj-title">Automated Vendor &amp; Intercompany Reconciliation Tool</div>
+        <div class="proj-desc">Built a production-grade Excel VBA macro (MACRO_v7) to automate the full intercompany reconciliation workflow between two entities using raw Tally exports. The tool runs a 4-pass matching engine — Invoice + Amount, Narration + Amount, Amount + Date (within 7 days), and Amount Only — applying the core rule that Co1 Debit must equal Co2 Credit. Outputs matched pairs, unmatched ledgers with category breakdowns, and a colour-coded Summary sheet. Handles multi-section Tally data, bill-reference extraction, and duplicate detection automatically.</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Excel VBA</span>
+          <span class="proj-tool">Tally Export</span>
+          <span class="proj-tool">Intercompany Recon</span>
+          <span class="proj-tool">Automation</span>
+        </div>
+      </div>
+
+
+      <div class="project-card reveal">
+        <div class="proj-cat">Excel VBA · Payment Automation</div>
+        <div class="proj-title">One-Click Payment Verification Macro</div>
+        <div class="proj-desc">Designed an Excel VBA macro to automate the pre-payment verification process — previously a 2-hour manual task compressed into under a minute. With a single click, the macro cross-verifies bank account details, party name, and currency against the payment register, flagging any mismatches before disbursement. Eliminates human error in high-volume payment processing and provides an auditable verification log. Directly accelerated payment turnaround and reduced finance team workload.</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Excel VBA</span>
+          <span class="proj-tool">Payment Processing</span>
+          <span class="proj-tool">Bank Verification</span>
+          <span class="proj-tool">Automation</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-cat">Knowledge Sharing · Leadership</div>
+        <div class="proj-title">Corporate Knowledge Sessions (×2 Delivered)</div>
+        <div class="proj-desc">Designed and delivered two professional knowledge-sharing sessions: "Balancing the Mind: A Corporate Ledger" (mindset through accounting metaphor) and "From Manual Work to Smart Work" (Excel automation for payment verification). Both received positive feedback and demonstrated communication and presentation capability.</div>
+        <div class="proj-tools">
+          <span class="proj-tool">PowerPoint</span>
+          <span class="proj-tool">Presentation</span>
+          <span class="proj-tool">Training</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     EDUCATION & CERTIFICATIONS
+     ============================================= -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Qualifications</div>
+    <h2 class="section-title">Education &amp; Certifications</h2>
+    <p class="section-sub">Academic foundation backed by active, role-specific upskilling in finance and data tools.</p>
+
+    <div class="edu-cert-grid reveal">
+      <!-- Education -->
+      <div>
+        <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);font-family:var(--ff-mono);margin-bottom:1.25rem;">Academic Background</h3>
+
+        <div class="edu-card">
+          <div class="edu-degree">Master of Business Administration (MBA) — Finance</div>
+          <div class="edu-school">Sasurie Academy of Engineering, Coimbatore</div>
+          <div class="edu-year">2014 – 2016</div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-degree">B.Com (CA) — Accounting</div>
+          <div class="edu-school">Ayyan Thiruvalluvar College of Arts &amp; Science, Punjai Puliampatti</div>
+          <div class="edu-year">2011 – 2014</div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
+          <div class="edu-school">Thiruvalluvar Government Higher Secondary School, Periyayeepalayam, Tirupur</div>
+          <div class="edu-year">2009 – 2011</div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-degree">Secondary School Leaving Certificate (SSLC)</div>
+          <div class="edu-school">Thiruvalluvar Government Higher Secondary School, Periyayeepalayam, Tirupur</div>
+          <div class="edu-year">2010</div>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);font-family:var(--ff-mono);margin-bottom:1.25rem;">Currently Learning</h3>
+          <div class="tool-chips">
+            <div class="tool-chip"><i class="fas fa-spinner"></i> SAP FICO Basics</div>
+            <div class="tool-chip"><i class="fas fa-spinner"></i> SQL for Finance</div>
+            <div class="tool-chip"><i class="fas fa-spinner"></i> Python — Pandas &amp; Automation</div>
+            <div class="tool-chip"><i class="fas fa-spinner"></i> Advanced Power BI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <div>
+        <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);font-family:var(--ff-mono);margin-bottom:1.25rem;">Certifications</h3>
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-icon"><i class="fas fa-file-excel"></i></div>
+            <div>
+              <div class="cert-name">Basic to Advanced Excel Program</div>
+              <div class="cert-issuer">Skill Nation · Aug 2025 · No Expiry</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon"><i class="fas fa-chart-pie"></i></div>
+            <div>
+              <div class="cert-name">Advanced Power BI Masterclass</div>
+              <div class="cert-issuer">Skill Nation · Oct 2025 · No Expiry</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon"><i class="fas fa-calculator"></i></div>
+            <div>
+              <div class="cert-name">Financial Modeling Course</div>
+              <div class="cert-issuer">Udemy · Oct 2025 · No Expiry</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon"><i class="fas fa-search-dollar"></i></div>
+            <div>
+              <div class="cert-name">Fundamentals of Financial Analysis</div>
+              <div class="cert-issuer">Coursera · Sep 2025 · No Expiry</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon"><i class="fas fa-robot"></i></div>
+            <div>
+              <div class="cert-name">ChatGPT &amp; AI Tools Mastery</div>
+              <div class="cert-issuer">Skill Nation · Aug 2025 · No Expiry</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     CONTACT SECTION
+     ============================================= -->
+<section id="contact" class="dark-section">
+  <div class="section-inner contact-inner">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="section-sub">Open to R2R, GL, Finance Analyst, and Senior Accounts Executive opportunities at IT/BPO companies. Reach out anytime.</p>
+
+    <div class="contact-cards reveal">
+      <a href="mailto:rajeshshanmugam@zohomail.in" class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <div class="cc-label">Email</div>
+          <div class="cc-val">rajeshshanmugam@zohomail.in</div>
+        </div>
+      </a>
+      <a href="tel:+919791325961" class="contact-card">
+        <i class="fas fa-phone"></i>
+        <div>
+          <div class="cc-label">Phone</div>
+          <div class="cc-val">+91 9791325961</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/shanmugamrajesh" target="_blank" class="contact-card">
+        <i class="fab fa-linkedin"></i>
+        <div>
+          <div class="cc-label">LinkedIn</div>
+          <div class="cc-val">Connect on LinkedIn</div>
+        </div>
+      </a>
+      <a href="#" class="contact-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <div>
+          <div class="cc-label">Location</div>
+          <div class="cc-val">Avinashi, Tamil Nadu, India</div>
+        </div>
+      </a>
+    </div>
+
+    <a href="Rajesh_Resume_251125.pdf" download class="btn btn-primary" style="font-size:1rem;padding:0.9rem 2.5rem;">
+      <i class="fas fa-download"></i> Download Full Resume
+    </a>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+     ============================================= -->
+<footer>
+  <span>Rajesh Shanmugam</span> · Senior Accounts Executive — R2R / GL · Designed &amp; built with intention
+</footer>
+
+<!-- =============================================
+     JAVASCRIPT
+     ============================================= -->
+<script>
+/* ---- Mobile Nav ---- */
+function toggleNav() {
+  document.getElementById('nav-links').classList.toggle('open');
+}
+
+/* ---- Close nav on link click ---- */
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('nav-links').classList.remove('open');
+  });
+});
+
+/* ---- Scroll Reveal ---- */
+const revealEls = document.querySelectorAll('.reveal');
+const timelineItems = document.querySelectorAll('.timeline-item');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => observer.observe(el));
+timelineItems.forEach(el => observer.observe(el));
+
+/* ---- Skill Bar Animation ---- */
+const skillFills = document.querySelectorAll('.skill-bar-fill');
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fill = entry.target;
+      const width = fill.getAttribute('data-width');
+      fill.style.width = width + '%';
+      skillObserver.unobserve(fill);
+    }
+  });
+}, { threshold: 0.5 });
+
+skillFills.forEach(fill => skillObserver.observe(fill));
+
+/* ---- Navbar scroll effect ---- */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 60) {
+    nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.3)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+
+/* ---- KPI number counter animation ---- */
+function animateCount(el, target, duration) {
+  let start = 0;
+  const isDecimal = String(target).includes('.');
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    el.textContent = current.toLocaleString() + (el.dataset.suffix || '');
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target.toLocaleString() + (el.dataset.suffix || '');
+  };
+  requestAnimationFrame(step);
+}
+
+/* ---- Staggered timeline animation delays ---- */
+timelineItems.forEach((item, i) => {
+  item.style.transitionDelay = `${i * 0.1}s`;
+});
+
+/* ---- Smooth internal anchor offset (for fixed nav) ---- */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.pageYOffset - 70;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
