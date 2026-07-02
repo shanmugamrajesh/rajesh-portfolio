@@ -883,6 +883,103 @@ section { padding: 6rem 2rem; }
   font-weight: 600;
 }
 
+/* Power BI Carousel */
+.pbi-carousel {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--navy);
+  margin: 1rem 0 0.5rem;
+  aspect-ratio: 16/7;
+  cursor: pointer;
+}
+.pbi-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.pbi-slide {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.pbi-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(10,22,40,0.7);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+.pbi-btn:hover { background: var(--gold); color: var(--navy); }
+.pbi-prev { left: 10px; }
+.pbi-next { right: 10px; }
+.pbi-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+.pbi-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  padding: 0;
+}
+.pbi-dot.active { background: var(--gold); transform: scale(1.3); }
+.pbi-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(10,22,40,0.85));
+  color: rgba(255,255,255,0.7);
+  font-size: 0.72rem;
+  font-family: var(--ff-mono);
+  letter-spacing: 0.5px;
+  padding: 1.5rem 1rem 0.5rem;
+  text-align: center;
+  pointer-events: none;
+}
+.proj-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.9rem 0;
+}
+.proj-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  background: rgba(10,22,40,0.06);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  color: var(--navy-light);
+  font-weight: 600;
+  font-family: var(--ff-mono);
+}
+.proj-stat .ps-icon { font-size: 0.72rem; }
+
 /* =============================================
    EDUCATION & CERTIFICATIONS
    ============================================= */
@@ -1547,6 +1644,57 @@ footer span { color: var(--gold); }
         </div>
       </div>
 
+      <div class="project-card reveal" style="grid-column: 1 / -1;">
+        <div class="proj-cat">Power BI · DAX · Financial Analytics</div>
+        <div class="proj-title">Intercompany Receivable &amp; Payable Dashboard — Multi-Company</div>
+        <div class="proj-desc">A comprehensive Power BI report tracking Payables &amp; Receivables across 5 companies with 200+ sample parties. Features an Executive Summary, Company &amp; Party Analysis, Transaction drill-through, Dynamic KPI Cards, Custom Tooltips, and Interactive Slicers — all powered by 20+ DAX measures across 4 structured report pages.</div>
+
+        <!-- Stat badges -->
+        <div class="proj-stats">
+          <span class="proj-stat"><span class="ps-icon">📄</span> 4 Report Pages</span>
+          <span class="proj-stat"><span class="ps-icon">📈</span> 20+ DAX Measures</span>
+          <span class="proj-stat"><span class="ps-icon">🎯</span> 12 Interactive Visuals</span>
+          <span class="proj-stat"><span class="ps-icon">🏢</span> 5 Companies</span>
+          <span class="proj-stat"><span class="ps-icon">👥</span> 200+ Sample Parties</span>
+          <span class="proj-stat"><span class="ps-icon">⚡</span> Drill-through Enabled</span>
+        </div>
+
+        <!-- Image carousel -->
+        <div class="pbi-carousel" id="pbiCarousel">
+          <div class="pbi-track" id="pbiTrack">
+            <img class="pbi-slide" src="https://raw.githubusercontent.com/shanmugamrajesh/intercompany-receivable-payable-dashboard/main/1%20Cover%20Page.jpg" alt="Cover Page" loading="lazy">
+            <img class="pbi-slide" src="https://raw.githubusercontent.com/shanmugamrajesh/intercompany-receivable-payable-dashboard/main/2%20Executive%20Dashboard.jpg" alt="Executive Dashboard" loading="lazy">
+            <img class="pbi-slide" src="https://raw.githubusercontent.com/shanmugamrajesh/intercompany-receivable-payable-dashboard/main/3%20Company%20%26%20Party%20Analysis.jpg" alt="Company & Party Analysis" loading="lazy">
+            <img class="pbi-slide" src="https://raw.githubusercontent.com/shanmugamrajesh/intercompany-receivable-payable-dashboard/main/4%20Party%20Detail%20Analysis.jpg" alt="Party Detail Analysis" loading="lazy">
+            <img class="pbi-slide" src="https://raw.githubusercontent.com/shanmugamrajesh/intercompany-receivable-payable-dashboard/main/5%20Transaction.jpg" alt="Transaction View" loading="lazy">
+            <img class="pbi-slide" src="https://raw.githubusercontent.com/shanmugamrajesh/intercompany-receivable-payable-dashboard/main/6%20Tooltip.jpg" alt="Custom Tooltip" loading="lazy">
+          </div>
+          <button class="pbi-btn pbi-prev" onclick="pbiSlide(-1)" aria-label="Previous">&#8249;</button>
+          <button class="pbi-btn pbi-next" onclick="pbiSlide(1)" aria-label="Next">&#8250;</button>
+          <div class="pbi-dots" id="pbiDots"></div>
+          <div class="pbi-caption" id="pbiCaption">Cover Page</div>
+        </div>
+
+        <!-- Tool tags + action buttons -->
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem;">
+          <div class="proj-tools" style="margin-top:0;">
+            <span class="proj-tool">Power BI</span>
+            <span class="proj-tool">DAX</span>
+            <span class="proj-tool">Power Query</span>
+            <span class="proj-tool">Data Modeling</span>
+            <span class="proj-tool">AR / AP Analytics</span>
+          </div>
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+            <a href="https://github.com/shanmugamrajesh/intercompany-receivable-payable-dashboard" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;background:var(--navy);color:var(--gold);border:1px solid rgba(201,168,76,0.35);border-radius:4px;font-size:0.78rem;font-weight:600;text-decoration:none;font-family:var(--ff-body);transition:all 0.3s ease;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--navy)';" onmouseout="this.style.background='var(--navy)';this.style.color='var(--gold)';">
+              <i class="fab fa-github" style="font-size:0.8rem;"></i> View on GitHub
+            </a>
+            <a href="https://github.com/shanmugamrajesh/intercompany-receivable-payable-dashboard/raw/main/Intercompany%20Receivable%20%26%20Payable%20Dashboard.pbix" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;background:transparent;color:var(--navy-light);border:1px solid var(--mist);border-radius:4px;font-size:0.78rem;font-weight:600;text-decoration:none;font-family:var(--ff-body);transition:all 0.3s ease;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--navy)';" onmouseout="this.style.borderColor='var(--mist)';this.style.color='var(--navy-light)';">
+              <i class="fas fa-download" style="font-size:0.75rem;"></i> Download .pbix
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="project-card reveal">
         <div class="proj-cat">Excel VBA · Reconciliation Automation</div>
         <div class="proj-title">Automated Vendor &amp; Intercompany Reconciliation Tool</div>
@@ -1834,6 +1982,49 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+/* ---- Power BI Dashboard Carousel ---- */
+(function() {
+  const captions = ['Cover Page', 'Executive Dashboard', 'Company & Party Analysis', 'Party Detail Analysis', 'Transaction View', 'Custom Tooltip'];
+  let current = 0;
+  const total = 6;
+
+  function initCarousel() {
+    const dotsEl = document.getElementById('pbiDots');
+    if (!dotsEl) return;
+    captions.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'pbi-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i+1));
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function goTo(n) {
+    current = (n + total) % total;
+    document.getElementById('pbiTrack').style.transform = `translateX(-${current * 100}%)`;
+    document.getElementById('pbiCaption').textContent = captions[current];
+    document.querySelectorAll('.pbi-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  window.pbiSlide = function(dir) { goTo(current + dir); };
+
+  // Auto-advance every 4 seconds
+  let timer = setInterval(() => pbiSlide(1), 4000);
+  document.getElementById('pbiCarousel') && document.getElementById('pbiCarousel').addEventListener('mouseenter', () => clearInterval(timer));
+  document.getElementById('pbiCarousel') && document.getElementById('pbiCarousel').addEventListener('mouseleave', () => { timer = setInterval(() => pbiSlide(1), 4000); });
+
+  // Touch swipe support
+  let startX = 0;
+  document.getElementById('pbiCarousel') && document.getElementById('pbiCarousel').addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  document.getElementById('pbiCarousel') && document.getElementById('pbiCarousel').addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) pbiSlide(diff > 0 ? 1 : -1);
+  }, {passive:true});
+
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initCarousel); }
+  else { initCarousel(); }
+})();
 </script>
 </body>
 </html>
